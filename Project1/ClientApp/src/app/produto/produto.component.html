@@ -1,0 +1,70 @@
+<div class="container bg-white mt-5 px-0">
+  <div class="col">
+    <h5>Produtos</h5>
+    <div class="row align-items-center mb-2">
+      <div class="col-12 col-md-9">
+        <span class="label-format">Edite e Adicione Produtos.</span>
+      </div>
+      <div class="col-12 col-md-3 d-flex justify-content-md-end">
+        <a [routerLink]="['/addProduto']" [queryParams]="{cdProduto: 0}" href="#" title="" class="btn btn-outline-dark w-100">
+          <span class="icon">+</span> Adicionar Produto
+        </a>
+      </div>
+    </div>
+
+    <div class="intercala">
+      <div class="row" name="linha" *ngFor="let produto of produtos">
+        <input type="hidden" value="{{produto.cdProduto}}" />
+        <div class="col-3 col-sm-2 col-md-1 border d-flex justify-content-center align-items-center">
+          <!--Imagem-->
+          <img width="55" height="55" src="{{ produto.imageContent }}" />
+          <!--<b> </b>-->
+        </div>
+        <div class="col-9 col-sm-10 col-md-11">
+          <!-- Conteudo -->
+          <div class="row">
+            <div class="col-12">
+              <b style="overflow-wrap:break-word !important;">{{ produto.nomeProduto }}</b>
+            </div>
+            <div class="col-12 col-md-3">
+              <label class="label-format w-100">Código do Produto</label>
+              <b>{{ produto.codigoProduto }}</b>
+            </div>
+            <div class="col-6 col-md-3">
+              <label class="label-format w-100">Preço</label>
+              <b>{{ produto.preco }}</b>
+            </div>
+            <div class="col-6 col-md-3">
+              <label class="label-format w-100">Preço Promocional</label>
+              <b>{{ produto.precoPromocional }}</b>
+            </div>
+            <div class="col-12 col-md-3 d-flex justify-content-end align-self-end">
+              <a class="round-button mb-1 mr-2" [routerLink]="['/addProduto']" [queryParams]="{cdProduto: produto.cdProduto}" routerLinkActive="active"><i style="color: black;" class="iconify" data-icon="jam:write"></i></a>
+              <a class="round-button mb-1" data-toggle="modal" data-target="#exampleModal" (click)="setProdutoDelete(produto.cdProduto)" ><i style="color: black;" class="iconify" data-icon="bi:trash"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Excluir Produto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span class="label-format">Tem certeza que deseja excluir o Produto?</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark bold" data-dismiss="modal">CANCELAR</button>
+        <button type="button" class="btn btn btn-dark" data-dismiss="modal" (click)="deletarProduto(cdProduto)">DELETAR</button>
+      </div>
+    </div>
+  </div>
+</div>

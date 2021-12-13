@@ -1,0 +1,45 @@
+<div class="container my-1">
+  <h5 for="Imagem">Imagem do Produto</h5>
+
+  <h6 for="Imagem">Clique no bloco e Escolha uma foto.</h6>
+  <form [formGroup]="formulario" (ngSubmit)="EnviarFormulario()">
+    <span style="color:red;" *ngIf="enviarFormulario">{{enviarFormulario}}</span>
+    <div class="row">
+      <div class="col-4">
+        <div class="card">
+          <span style="color:red;" *ngIf="message">{{message}}</span>
+          <img class="m-25 h-25" [src]="imgURL" *ngIf="imgURL">
+          <input type="hidden" ng-model="ImageContent" class="form-control" formControlName="ImageContent">
+          <input type="hidden" ng-model="cdProduto" class="form-control" formControlName="cdProduto">
+          <label class="labelFile mb-0 rounded-bottom">
+            <input #file type="file" accept='image/*' (change)="preview(file.files)" />Imagem Principal
+          </label>
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="nomeProduto">Nome do Produto</label>
+        <input type="text" ng-model="NomeProduto" class="form-control" formControlName="NomeProduto" required>
+      </div>
+      <div class="col-12">
+        <label for="codigoProduto">Código do Produto</label>
+        <input type="text" ng-model="CodigoProduto" class="form-control" formControlName="CodigoProduto" required>
+      </div>
+      <div class="col-12">
+        <label for="preco">Preço</label>
+        <input matInput ng-model="Preco" class="form-control" formControlName="Preco" required>
+      </div>
+      <div class="col-12">
+        <label for="precoPromocional">Preço Promocional</label>
+        <input matInput ng-Model="PrecoPromocional" class="form-control" formControlName="PrecoPromocional" required>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-12 d-flex justify-content-center">
+        <button type="button" style="width:100px;" class="btn btn-outline-dark  mr-2" [routerLink]="['/produto']">Cancelar</button>
+        <button type="submit" style="width:100px;" class="btn btn-dark" [disabled]="!formulario.valid">Salvar</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
